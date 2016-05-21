@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class HelloCommand extends HystrixCommand<String> {
 
     private static String commandKey = "Hello-Command";
-    private static int timeout = 2000;
-    private static int threadPoolSize = 1;
+    private static int timeout = 3000;
+    private static int threadPoolSize = 3;
     private static Setter setter;
     private String name;
 
@@ -41,17 +41,21 @@ public class HelloCommand extends HystrixCommand<String> {
     @Override
     protected String run() throws Exception {
         System.out.println("Hi name: " + name + " the current threadName: " + Thread.currentThread().getName());
-        Thread.sleep(1000);
-        //Thread.sleep(3000);
+        Thread.sleep(2000);
+        //Thread.sleep(4000);
         return "HystrixCommand done, this time:" + new Date();
     }
 
     public static void main(String[] args) {
         try {
-            HelloCommand command = new HelloCommand("hystrix_test");
-            Future<String> futureResult = command.queue();
-
-            String result = futureResult.get(4000, TimeUnit.MILLISECONDS);
+            //异步调用，可使用Future对应取值超时时间
+            HelloCommand asyCommand = new HelloCommand("asynchronous_hystrix_test");
+            Future<String> futureResult = asyCommand.queue();
+            //同步调用，使用默认的timeout值
+            HelloCommand synCommand = new HelloCommand("synchronous_hystrix_test");
+            String result = futureResult.get(5000, TimeUnit.MILLISECONDS);
+            System.out.println("result=" + result);
+            result = synCommand.execute();
             System.out.println("result=" + result);
         } catch (Exception e) {
             e.printStackTrace();
