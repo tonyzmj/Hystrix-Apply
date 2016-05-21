@@ -7,6 +7,10 @@
     <groupId>com.mj</groupId>
     <artifactId>Hystrix-Apply</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Hystrix-Apply</name>
+    <url>http://maven.apache.org</url>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -79,6 +83,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
             <version>3.2.3.RELEASE</version>
         </dependency>
 
