@@ -50,7 +50,7 @@ public class HelloCommand extends HystrixCommand<String> {
         try {
             HelloCommand command = new HelloCommand("hystrix_test");
             Future<String> futureResult = command.queue();
-            
+
             String result = futureResult.get(4000, TimeUnit.MILLISECONDS);
             System.out.println("result=" + result);
         } catch (Exception e) {
