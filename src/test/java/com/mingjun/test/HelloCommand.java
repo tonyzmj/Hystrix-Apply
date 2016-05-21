@@ -1,4 +1,4 @@
-package com.mj.test;
+package com.mingjun.test;
 
 import com.netflix.hystrix.*;
 
